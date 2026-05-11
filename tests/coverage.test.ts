@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 bvasilenko
 import { describe, it, expect } from "vitest";
 import { resolveClasses } from "../src/resolve.js";
 import { SPACE_VALUES, SPACE_PROPS, spaceClassMap } from "../src/tokens/space.js";

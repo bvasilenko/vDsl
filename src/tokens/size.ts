@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 bvasilenko
 
 export const SIZE_VALUES = ["sm", "md", "lg", "icon"] as const;
 

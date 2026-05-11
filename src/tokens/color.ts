@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 bvasilenko
 
 export const COLOR_VALUES = [
   "bg", "fg", "muted", "accent", "destructive", "success", "warning",

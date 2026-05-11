@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 bvasilenko
 import { type DslProps } from "./types.js";
 import { spaceClassMap, type SpaceProp } from "./tokens/space.js";
 import { colorClassMap, type ColorProp } from "./tokens/color.js";

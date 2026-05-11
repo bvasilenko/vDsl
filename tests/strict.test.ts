@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 bvasilenko
 import { describe, it, expect } from "vitest";
 import { dslSchema } from "../src/schema.js";
 import { SPACE_VALUES, SPACE_PROPS } from "../src/tokens/space.js";

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 bvasilenko
 import { expectError, expectAssignable } from "tsd";
 import { type DslProps } from "../src/types.js";
 

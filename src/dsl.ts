@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 bvasilenko
 import { createElement, type ElementType } from "react";
 import { dslSchema } from "./schema.js";
 import { resolveClasses } from "./resolve.js";

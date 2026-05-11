@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 bvasilenko
 
 export const DISPLAY_VALUES = [
   "block", "flex", "grid", "inline", "inline-flex", "inline-grid", "hidden",

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 bvasilenko
 export { dsl } from "./dsl.js";
 export { resolveClasses } from "./resolve.js";
 export { extractDataClass } from "./dataClass.js";
