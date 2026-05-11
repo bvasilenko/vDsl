@@ -12,5 +12,6 @@ export {
   DisplayTokenSchema,
   AlignTokenSchema,
   JustifyTokenSchema,
+  FlexTokenSchema,
 } from "./schema.js";
 export type { DslProps, DslPropToken, DslComponent } from "./types.js";

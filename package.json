@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "@booga/vtheme": "^0.1.0",
-    "@booga/vui": "^0.1.0",
     "zod": "^3.0.0"
   },
   "peerDependencies": {

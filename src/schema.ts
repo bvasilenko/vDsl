@@ -30,6 +30,7 @@ export const SizeTokenSchema    = z.enum(SIZE_VALUES);
 export const DisplayTokenSchema = z.enum(DISPLAY_VALUES);
 export const AlignTokenSchema   = z.enum(ALIGN_VALUES);
 export const JustifyTokenSchema = z.enum(JUSTIFY_VALUES);
+export const FlexTokenSchema    = z.union([AlignTokenSchema, JustifyTokenSchema]);
 
 export const dslSchema = z.object({
   p:       SpaceTokenSchema.optional(),

@@ -44,9 +44,14 @@ describe("dsl() HOC — className composition", () => {
     expect(className).not.toMatch(/^\s|\s$/);
   });
 
-  it("does not set className when no DSL props and no user className", () => {
+  it("sets no class attribute when no DSL props and no user className are given", () => {
     render(<DslButton>x</DslButton>);
-    expect(screen.getByRole("button").className).toBe("");
+    expect(screen.getByRole("button")).not.toHaveAttribute("class");
+  });
+
+  it("DSL prop passed as undefined contributes no class to className", () => {
+    render(<DslButton p={undefined}>x</DslButton>);
+    expect(screen.getByRole("button")).not.toHaveAttribute("class");
   });
 
   it("resolves all space props to className", () => {

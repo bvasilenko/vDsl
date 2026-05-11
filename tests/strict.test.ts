@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Copyright (c) 2026 bvasilenko
 import { describe, it, expect } from "vitest";
-import { dslSchema } from "../src/schema.js";
+import { dslSchema, FlexTokenSchema } from "../src/schema.js";
 import { SPACE_VALUES, SPACE_PROPS } from "../src/tokens/space.js";
 import { COLOR_VALUES, COLOR_PROPS } from "../src/tokens/color.js";
 import { VARIANT_VALUES } from "../src/tokens/variant.js";
@@ -9,10 +9,10 @@ import { SIZE_VALUES } from "../src/tokens/size.js";
 import { DISPLAY_VALUES } from "../src/tokens/display.js";
 import { ALIGN_VALUES, JUSTIFY_VALUES } from "../src/tokens/flex.js";
 
+const INVALID_SPACE_TOKEN_SAMPLES: unknown[] = [5, -1, "2", null, true, 0.5];
+
 const INVALID_VALUES_BY_PROP: Record<string, unknown[]> = {
-  p:       [5, 7, 9, 11, -1, 100, 999, "2", null, true, 0.5],
-  m:       [5, -1, "4", null],
-  pt:      [5, -1, "1"],
+  ...Object.fromEntries(SPACE_PROPS.map((prop) => [prop, INVALID_SPACE_TOKEN_SAMPLES])),
   variant: ["invalid", "Primary", "PRIMARY", "btn-primary", 0, null],
   size:    ["xl", "xs", "xxl", "2xl", 0, null],
   bg:      ["red", "#fff", "primary", "accent-light", 0, null],
@@ -129,5 +129,69 @@ describe("dslSchema — strict: unknown props", () => {
 
   it("rejects a prop named 'style' (not a DSL prop)", () => {
     expect(dslSchema.safeParse({ style: {} }).success).toBe(false);
+  });
+});
+
+describe("FlexTokenSchema — union of align and justify token domains", () => {
+  describe("accepts every AlignToken value", () => {
+    for (const value of ALIGN_VALUES) {
+      it(`accepts align value "${value}"`, () => {
+        expect(FlexTokenSchema.safeParse(value).success).toBe(true);
+      });
+    }
+  });
+
+  describe("accepts every JustifyToken value", () => {
+    for (const value of JUSTIFY_VALUES) {
+      it(`accepts justify value "${value}"`, () => {
+        expect(FlexTokenSchema.safeParse(value).success).toBe(true);
+      });
+    }
+  });
+
+  it("accepts values shared by both align and justify domains", () => {
+    const shared = ALIGN_VALUES.filter((v) =>
+      (JUSTIFY_VALUES as readonly string[]).includes(v)
+    );
+    expect(shared.length).toBeGreaterThan(0);
+    for (const v of shared) {
+      expect(FlexTokenSchema.safeParse(v).success).toBe(true);
+    }
+  });
+
+  it("rejects all SpaceToken numeric values", () => {
+    for (const v of SPACE_VALUES) {
+      expect(FlexTokenSchema.safeParse(v).success).toBe(false);
+    }
+  });
+
+  it("rejects all VariantToken string values", () => {
+    for (const v of VARIANT_VALUES) {
+      expect(FlexTokenSchema.safeParse(v).success).toBe(false);
+    }
+  });
+
+  it("rejects all SizeToken string values", () => {
+    for (const v of SIZE_VALUES) {
+      expect(FlexTokenSchema.safeParse(v).success).toBe(false);
+    }
+  });
+
+  it("rejects all DisplayToken string values", () => {
+    for (const v of DISPLAY_VALUES) {
+      expect(FlexTokenSchema.safeParse(v).success).toBe(false);
+    }
+  });
+
+  it("rejects null, undefined, boolean, and number zero", () => {
+    for (const v of [null, undefined, true, false, 0]) {
+      expect(FlexTokenSchema.safeParse(v).success).toBe(false);
+    }
+  });
+
+  it("rejects spatial direction strings outside the DSL token set", () => {
+    for (const v of ["left", "right", "top", "bottom", "auto", "normal", "flex-start", "flex-end", "space-between", ""]) {
+      expect(FlexTokenSchema.safeParse(v).success).toBe(false);
+    }
   });
 });

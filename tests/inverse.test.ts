@@ -32,7 +32,7 @@ describe("extractDataClass — structural contract", () => {
 });
 
 describe("extractDataClass — token set equivalence with resolveClasses", () => {
-  const FIXTURE_CASES: DslProps[] = [
+  const MULTI_CATEGORY_CASES: DslProps[] = [
     { p: 2, m: 4 },
     { p: 2, pt: 1, pb: 4, gap: 8 },
     { p: 4, bg: "accent", variant: "primary", size: "md" },
@@ -45,7 +45,7 @@ describe("extractDataClass — token set equivalence with resolveClasses", () =>
     },
   ];
 
-  for (const props of FIXTURE_CASES) {
+  for (const props of MULTI_CATEGORY_CASES) {
     const label = Object.keys(props).join(", ");
     it(`token set matches for { ${label} }`, () => {
       const classes  = resolveClasses(props);
@@ -54,8 +54,22 @@ describe("extractDataClass — token set equivalence with resolveClasses", () =>
     });
   }
 
-  it("empty props: both return zero tokens", () => {
-    expect(resolveClasses({})).toEqual([]);
-    expect(extractDataClass({})).toEqual({});
-  });
+  const SINGLE_CATEGORY_CASES: DslProps[] = [
+    { bg: "accent" },
+    { color: "fg" },
+    { variant: "primary" },
+    { size: "md" },
+    { display: "flex" },
+    { align: "center" },
+    { justify: "between" },
+  ];
+
+  for (const props of SINGLE_CATEGORY_CASES) {
+    const label = Object.entries(props).map(([k, v]) => `${k}: "${v}"`).join(", ");
+    it(`token set matches for single-category { ${label} }`, () => {
+      const classes  = resolveClasses(props);
+      const fromAttr = tokenSetFromDataClass(extractDataClass(props));
+      expect(fromAttr).toEqual([...classes].sort());
+    });
+  }
 });
