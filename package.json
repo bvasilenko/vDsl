@@ -1,6 +1,6 @@
 {
   "name": "@booga/vdsl",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Prop DSL for typed UI composition. Space, color, variant, size tokens compile to Tailwind classes at render time; same props emit data-class attributes for SSG semantic rewrite.",
   "type": "module",
   "sideEffects": false,
