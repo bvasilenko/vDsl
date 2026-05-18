@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-05-18
+
+### Removed
+
+- `@booga/vtheme` dependency. vDsl emits Tailwind class-name strings; it never
+  imports vTheme. The dependency was dead weight, and its stale `^0.1.0` range
+  (vTheme is at 0.2.2) misrepresented the contract. vTheme is the consumer's
+  Tailwind preset, not vDsl's runtime dependency.
+
 ## [0.2.0] - 2026-05-18
 
 ### Fixed
@@ -47,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Display tokens: `block flex grid inline inline-flex inline-grid hidden`
 - Flex tokens: `align` (`start center end stretch baseline`), `justify` (`start center end between around evenly`)
 
-[Unreleased]: https://github.com/bvasilenko/vDsl/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/bvasilenko/vDsl/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/bvasilenko/vDsl/releases/tag/v0.2.1
 [0.2.0]: https://github.com/bvasilenko/vDsl/releases/tag/v0.2.0
 [0.1.0]: https://github.com/bvasilenko/vDsl/releases/tag/v0.1.0
