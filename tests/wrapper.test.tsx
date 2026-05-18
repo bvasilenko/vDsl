@@ -69,8 +69,8 @@ describe("dsl() HOC — className composition", () => {
       </DslDiv>
     );
     const { className } = screen.getByText("x");
-    expect(className).toContain("bg-[var(--v-color-accent)]");
-    expect(className).toContain("text-[var(--v-color-fg)]");
+    expect(className).toContain("bg-accent");
+    expect(className).toContain("text-foreground");
     expect(className).toContain("variant-primary");
     expect(className).toContain("size-md");
     expect(className).toContain("flex");

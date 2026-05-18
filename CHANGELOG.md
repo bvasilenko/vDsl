@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-05-18
+
+### Fixed
+
+- Color tokens (`color` / `bg` props) emitted arbitrary-value classes —
+  `text-[var(--v-color-muted)]` — that never produced a color. vTheme stores
+  each role as bare OKLCH channels (`95% 0.008 240`), so `color: var(--v-color-*)`
+  is an invalid value the browser discards; every `color="muted"` rendered as the
+  inherited default (black) instead of muted grey. Color tokens now resolve to
+  vTheme's semantic role utilities (`text-muted-foreground`, `bg-accent`, …),
+  which wrap those channels in `oklch(… / <alpha>)`. `color` and `bg` map
+  separately: `color="muted"` → muted text role, `bg="muted"` → muted surface.
+
+### Added
+
+- `dslSafelist` — exhaustive array of every Tailwind utility class `dsl()` can
+  emit at runtime (spacing, display, flex alignment). `dsl()` builds class names
+  with template literals (`gap-${v}`), which Tailwind's static content scanner
+  cannot detect. Any package that precompiles a stylesheet for DSL-authored
+  components must feed this array into its Tailwind config `safelist`, or the
+  generated CSS silently omits most of the spacing scale. Derived from the same
+  token maps `resolveClasses` uses, so it cannot drift.
+
 ## [0.1.0] - 2026-05-11
 
 ### Added
@@ -24,5 +47,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Display tokens: `block flex grid inline inline-flex inline-grid hidden`
 - Flex tokens: `align` (`start center end stretch baseline`), `justify` (`start center end between around evenly`)
 
-[Unreleased]: https://github.com/bvasilenko/vDsl/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/bvasilenko/vDsl/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/bvasilenko/vDsl/releases/tag/v0.2.0
 [0.1.0]: https://github.com/bvasilenko/vDsl/releases/tag/v0.1.0

@@ -8,6 +8,7 @@ const VALUE_EXPORTS = [
   "dsl",
   "resolveClasses",
   "extractDataClass",
+  "dslSafelist",
   "dslSchema",
   "SpaceTokenSchema",
   "ColorTokenSchema",

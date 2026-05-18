@@ -3,6 +3,7 @@
 export { dsl } from "./dsl.js";
 export { resolveClasses } from "./resolve.js";
 export { extractDataClass } from "./dataClass.js";
+export { dslSafelist } from "./safelist.js";
 export {
   dslSchema,
   SpaceTokenSchema,
